@@ -1,4 +1,4 @@
-package com.maxaramos.examsimulator;
+package com.maxaramos.examsimulator.webserver;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;

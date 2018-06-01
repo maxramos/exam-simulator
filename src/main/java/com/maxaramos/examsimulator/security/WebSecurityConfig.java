@@ -21,10 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.oauth2Login()
 				.and()
 			.logout()
-				.addLogoutHandler(oAuth2LogoutHandler)
-				.and()
-			.csrf()
-				.disable();
+				.addLogoutHandler(oAuth2LogoutHandler);
 	}
 
 

@@ -1,4 +1,4 @@
-package com.maxaramos.examsimulator.webclient;
+package com.maxaramos.examsimulator.security;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

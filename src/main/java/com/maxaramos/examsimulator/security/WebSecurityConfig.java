@@ -1,26 +1,33 @@
 package com.maxaramos.examsimulator.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-//@EnableWebSecurity
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private OAuth2LogoutHandler oAuth2LogoutHandler;
+//	@Autowired
+//	private OAuth2LogoutHandler oAuth2LogoutHandler;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+//		OAuth2AuthorizationRequestRedirectFilter
+//		OAuth2LoginAuthenticationFilter
+//		OAuth2LoginAuthenticationProvider
+//		OidcAuthorizationCodeAuthenticationProvider
+//		DefaultLoginPageGeneratingFilter
+
 		http
+			.requiresChannel()
+				.anyRequest().requiresSecure()
+				.and()
 			.authorizeRequests()
-				.anyRequest()
-					.authenticated()
+				.anyRequest().authenticated()
 				.and()
-			.oauth2Login()
-				.and()
-			.logout()
-				.addLogoutHandler(oAuth2LogoutHandler);
+			.oauth2Login();
+//			.logout()
+//				.addLogoutHandler(oAuth2LogoutHandler);
 	}
 
 

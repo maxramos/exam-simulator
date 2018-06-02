@@ -1,9 +1,6 @@
-package com.maxaramos.examsimulator.webserver;
+package com.maxaramos.examsimulator.security;
 
-import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
-import org.apache.tomcat.util.descriptor.web.SecurityCollection;
-import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
@@ -22,23 +19,21 @@ public class WebServerConfig {
 	@Bean
 	public ConfigurableServletWebServerFactory webServerFactory() {
 		Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
-		connector.setScheme("http");
-		connector.setSecure(false);
 		connector.setPort(httpPort);
 		connector.setRedirectPort(httpsPort);
 
 		TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory() {
-			@Override
-			protected void postProcessContext(Context context) {
-				SecurityCollection securityCollection = new SecurityCollection();
-				securityCollection.addPattern("/*");
-
-				SecurityConstraint securityConstraint = new SecurityConstraint();
-				securityConstraint.setUserConstraint("CONFIDENTIAL");
-				securityConstraint.addCollection(securityCollection);
-
-				context.addConstraint(securityConstraint);
-			}
+//			@Override
+//			protected void postProcessContext(Context context) {
+//				SecurityCollection securityCollection = new SecurityCollection();
+//				securityCollection.addPattern("/*");
+//
+//				SecurityConstraint securityConstraint = new SecurityConstraint();
+//				securityConstraint.setUserConstraint("CONFIDENTIAL");
+//				securityConstraint.addCollection(securityCollection);
+//
+//				context.addConstraint(securityConstraint);
+//			}
 		};
 		factory.addAdditionalTomcatConnectors(connector);
 		return factory;

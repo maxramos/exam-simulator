@@ -22,19 +22,7 @@ public class WebServerConfig {
 		connector.setPort(httpPort);
 		connector.setRedirectPort(httpsPort);
 
-		TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory() {
-//			@Override
-//			protected void postProcessContext(Context context) {
-//				SecurityCollection securityCollection = new SecurityCollection();
-//				securityCollection.addPattern("/*");
-//
-//				SecurityConstraint securityConstraint = new SecurityConstraint();
-//				securityConstraint.setUserConstraint("CONFIDENTIAL");
-//				securityConstraint.addCollection(securityCollection);
-//
-//				context.addConstraint(securityConstraint);
-//			}
-		};
+		TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
 		factory.addAdditionalTomcatConnectors(connector);
 		return factory;
 	}

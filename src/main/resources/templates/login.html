@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<title>Exam Simulator Login</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+<h3>Login with OAuth 2.0</h3>
+<table>
+	<tr th:each="clientRegistration : ${clientRegistrationList}">
+		<td>
+			<a href="#" th:href="@{'/oauth2/authorization/' + ${clientRegistration.registrationId}}" th:text="${clientRegistration.clientName}">Provider</a>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

@@ -23,9 +23,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest().requiresSecure()
 				.and()
 			.authorizeRequests()
+				.antMatchers("/login").permitAll()
+				.and()
+			.authorizeRequests()
 				.anyRequest().authenticated()
 				.and()
-			.oauth2Login();
+			.oauth2Login()
+				.loginPage("/login");
 //			.logout()
 //				.addLogoutHandler(oAuth2LogoutHandler);
 	}

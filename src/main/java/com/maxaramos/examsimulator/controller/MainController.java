@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -25,10 +26,14 @@ public class MainController {
 	private OAuth2AuthorizedClientService authorizedClientService;
 
 	@GetMapping("/")
-	public String index(Model model, OAuth2AuthenticationToken authentication) {
-		OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
+	public String index(Model model, Authentication authentication) {
+		if (authentication instanceof OAuth2AuthenticationToken) {
+			OAuth2AuthenticationToken oauth2Authentication = (OAuth2AuthenticationToken) authentication;
+			OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(oauth2Authentication.getAuthorizedClientRegistrationId(), authentication.getName());
+			model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
+		}
+
 		model.addAttribute("username", authentication.getName());
-		model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
 		return "index";
 	}
 

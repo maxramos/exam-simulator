@@ -1,17 +1,45 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<title>Exam Simulator Login</title>
-	<meta charset="utf-8" />
+<title>Exam Simulator Login</title>
+<meta charset="utf-8" />
 </head>
 <body>
-<h3>Login with OAuth 2.0</h3>
-<table>
-	<tr th:each="clientRegistration : ${clientRegistrationList}">
-		<td>
-			<a href="#" th:href="@{'/oauth2/authorization/' + ${clientRegistration.registrationId}}" th:text="${clientRegistration.clientName}">Provider</a>
-		</td>
-	</tr>
-</table>
+	<h3>Login with OAuth 2.0</h3>
+	<table>
+		<tr th:each="clientRegistration : ${clientRegistrationList}">
+			<td>
+				<a href="#" th:href="@{'/oauth2/authorization/' + ${clientRegistration.registrationId}}"  th:text="${clientRegistration.clientName}">Provider</a>
+			</td>
+		</tr>
+	</table>
+	<h3>Login</h3>
+	<form th:action="@{/login}" method="post">
+		<table>
+			<tr>
+				<td>
+					<label for="username">Username</label>
+				</td>
+				<td>
+					<input type="text" id="username" name="username" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="password">Password</label>
+				</td>
+				<td>
+					<input type="password" id="password" name="password" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="Log in" />
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

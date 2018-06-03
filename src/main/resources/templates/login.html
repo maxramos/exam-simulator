@@ -7,6 +7,9 @@
 <meta charset="utf-8" />
 </head>
 <body>
+	<p th:if="${param.logout}">
+		You have been logged out.
+	</p>
 	<h3>Login with OAuth 2.0</h3>
 	<table>
 		<tr th:each="clientRegistration : ${clientRegistrationList}">
@@ -17,6 +20,9 @@
 	</table>
 	<h3>Login</h3>
 	<form th:action="@{/login}" method="post">
+		<p th:if="${param.error}">
+			Invalid username and password.
+		</p>
 		<table>
 			<tr>
 				<td>

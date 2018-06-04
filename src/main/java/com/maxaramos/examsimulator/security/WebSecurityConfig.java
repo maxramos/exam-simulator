@@ -48,9 +48,6 @@ public class WebSecurityConfig {
 	//		UsernamePasswordAuthenticationFilter
 
 			http
-				.requiresChannel()
-					.anyRequest().requiresSecure()
-					.and()
 				.authorizeRequests()
 					.antMatchers("/login").permitAll()
 					.anyRequest().authenticated()

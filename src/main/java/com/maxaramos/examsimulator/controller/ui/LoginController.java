@@ -1,6 +1,7 @@
-package com.maxaramos.examsimulator.controller;
+package com.maxaramos.examsimulator.controller.ui;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class LoginController {
 	public List<ClientRegistration> getClientRegistrationList() {
 		List<ClientRegistration> clientRegistrationList = new ArrayList<>();
 		clientRegistrationRepository.iterator().forEachRemaining(clientRegistrationList::add);
+		clientRegistrationList.sort(Comparator.comparing(ClientRegistration::getClientName));
 		return clientRegistrationList;
 	}
 

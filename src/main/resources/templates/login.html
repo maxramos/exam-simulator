@@ -3,49 +3,51 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-<title>Exam Simulator Login</title>
-<meta charset="utf-8" />
+	<title>Login</title>
+	<meta charset="utf-8" />
 </head>
 <body>
 	<p th:if="${param.logout}">
 		You have been logged out.
 	</p>
-	<h3>Login with OAuth 2.0</h3>
-	<table>
-		<tr th:each="clientRegistration : ${clientRegistrationList}">
-			<td>
+	<div>
+		<h3 style="margin-bottom: 0">Login via</h3>
+		<ul style="margin-top: 0">
+			<li th:each="clientRegistration : ${clientRegistrationList}">
 				<a href="#" th:href="@{'/oauth2/authorization/' + ${clientRegistration.registrationId}}"  th:text="${clientRegistration.clientName}">Provider</a>
-			</td>
-		</tr>
-	</table>
-	<h3>Login</h3>
-	<form th:action="@{/login}" method="post">
+			</li>
+		</ul>
+	</div>
+	<div>
+		<h3 style="margin-bottom: 0">Login</h3>
 		<p th:if="${param.error}">
-			Invalid username and password.
+			Invalid username or password.
 		</p>
-		<table>
-			<tr>
-				<td>
-					<label for="username">Username</label>
-				</td>
-				<td>
-					<input type="text" id="username" name="username" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label for="password">Password</label>
-				</td>
-				<td>
-					<input type="password" id="password" name="password" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="submit" value="Log in" />
-				</td>
-			</tr>
-		</table>
-	</form>
+		<form th:action="@{/login}" method="post">
+			<table>
+				<tr>
+					<td>
+						<label for="username">Username</label>
+					</td>
+					<td>
+						<input type="text" id="username" name="username" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="password">Password</label>
+					</td>
+					<td>
+						<input type="password" id="password" name="password" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="submit" value="Log in" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 </html>

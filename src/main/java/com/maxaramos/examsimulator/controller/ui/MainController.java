@@ -1,4 +1,4 @@
-package com.maxaramos.examsimulator.controller;
+package com.maxaramos.examsimulator.controller.ui;
 
 import java.util.Collections;
 import java.util.Map;
@@ -54,6 +54,7 @@ public class MainController {
 					.bodyToMono(Map.class)
 					.block();
 		}
+
 		model.addAttribute("userAttributes", userAttributes);
 		return "userinfo";
 	}

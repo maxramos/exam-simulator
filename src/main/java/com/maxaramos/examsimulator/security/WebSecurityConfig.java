@@ -3,6 +3,8 @@ package com.maxaramos.examsimulator.security;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -33,20 +35,28 @@ public class WebSecurityConfig {
 	}
 
 	@Configuration
-	public static class UiSecurityConfig extends WebSecurityConfigurerAdapter {
-
-	//	@Autowired
-	//	private OAuth2LogoutHandler oAuth2LogoutHandler;
+	@Order(Ordered.HIGHEST_PRECEDENCE)
+	public static class WsSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-	//		OAuth2AuthorizationRequestRedirectFilter
-	//		OAuth2LoginAuthenticationFilter
-	//		OAuth2LoginAuthenticationProvider
-	//		OidcAuthorizationCodeAuthenticationProvider
-	//		DefaultLoginPageGeneratingFilter
-	//		UsernamePasswordAuthenticationFilter
+			http
+				.antMatcher("/api/**")
+				.authorizeRequests()
+					.antMatchers("/api/**").authenticated()
+					.and()
+				.httpBasic()
+					.and()
+				.csrf().disable();
+		}
 
+	}
+
+	@Configuration
+	public static class UiSecurityConfig extends WebSecurityConfigurerAdapter {
+
+		@Override
+		protected void configure(HttpSecurity http) throws Exception {
 			http
 				.authorizeRequests()
 					.antMatchers("/login").permitAll()
@@ -59,8 +69,6 @@ public class WebSecurityConfig {
 					.loginPage("/login")
 					.and()
 				.csrf().disable();
-	//			.logout()
-	//				.addLogoutHandler(oAuth2LogoutHandler);
 		}
 
 	}

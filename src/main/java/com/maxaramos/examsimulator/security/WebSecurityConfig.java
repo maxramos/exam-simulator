@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class WebSecurityConfig {
 
 	@Value("${spring.security.user.name}")
@@ -61,7 +61,7 @@ public class WebSecurityConfig {
 //			OAuth2AuthorizationRequestRedirectFilter
 			http
 				.authorizeRequests()
-					.antMatchers("/login").permitAll()
+					.antMatchers("/login/**").permitAll()
 					.anyRequest().authenticated()
 					.and()
 				.oauth2Login()

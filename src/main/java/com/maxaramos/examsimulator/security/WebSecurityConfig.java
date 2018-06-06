@@ -57,11 +57,11 @@ public class WebSecurityConfig {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-//			OAuth2LoginAuthenticationFilter
 //			OAuth2AuthorizationRequestRedirectFilter
+//			OAuth2LoginAuthenticationFilter
 			http
 				.authorizeRequests()
-					.antMatchers("/login/**").permitAll()
+					.antMatchers("/login").permitAll()
 					.anyRequest().authenticated()
 					.and()
 				.oauth2Login()

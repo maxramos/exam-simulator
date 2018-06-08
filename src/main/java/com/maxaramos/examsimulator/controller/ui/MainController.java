@@ -27,15 +27,27 @@ public class MainController {
 
 	@GetMapping("/")
 	public String index(Model model, Authentication authentication) {
+//	public String index() {
 		if (authentication instanceof OAuth2AuthenticationToken) {
 			OAuth2AuthenticationToken oauth2Authentication = (OAuth2AuthenticationToken) authentication;
 			OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(oauth2Authentication.getAuthorizedClientRegistrationId(), authentication.getName());
 			model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
 		}
 
-		model.addAttribute("username", authentication.getName());
 		return "index";
 	}
+
+//	@GetMapping("/home")
+//	public String index(Model model, Authentication authentication) {
+//		if (authentication instanceof OAuth2AuthenticationToken) {
+//			OAuth2AuthenticationToken oauth2Authentication = (OAuth2AuthenticationToken) authentication;
+//			OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(oauth2Authentication.getAuthorizedClientRegistrationId(), authentication.getName());
+//			model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
+//		}
+
+//		model.addAttribute("username", authentication.getName());
+//		return "home";
+//	}
 
 	@GetMapping("/userinfo")
 	public String userinfo(Model model, OAuth2AuthenticationToken authentication) {

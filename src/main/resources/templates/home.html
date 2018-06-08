@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-	<title>Index</title>
+	<title>Home</title>
 	<meta charset="utf-8" />
 </head>
 <body>
@@ -23,12 +23,7 @@
 	<div>
 		<span>You are successfully logged in </span>
 		<span style="font-weight: bold" th:text="${username}"></span>
-		<span th:if="${clientName}">via </span>
-		<span th:if="${clientName}" style="font-weight: bold" th:text="${clientName}"></span>
 	</div>
 	<br />
-	<div th:if="${clientName}">
-		<a href="/userinfo" th:href="@{/userinfo}">Display User Info</a>
-	</div>
 </body>
 </html>

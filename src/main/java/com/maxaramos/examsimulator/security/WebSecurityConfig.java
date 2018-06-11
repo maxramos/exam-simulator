@@ -57,8 +57,8 @@ public class WebSecurityConfig {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-//			OAuth2AuthorizationRequestRedirectFilter
-//			OAuth2LoginAuthenticationFilter
+//			OAuth2AuthorizationRequestRedirectFilter = /oauth2/authorization/{registrationId}
+//			OAuth2LoginAuthenticationFilter = /login/oauth2/code/*
 			http
 				.authorizeRequests()
 					.antMatchers("/login").permitAll()
